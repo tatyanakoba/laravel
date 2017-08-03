@@ -11,12 +11,11 @@
 |
 */
 
+
+Route::post('/', 'Auth\LoginController@login');
 Route::get('/', function () {
-    return view('index');
+    $advert = App\Adverts::paginate(5);
+    return view('index', compact('advert'));
 });
 
-Route::post('/auth/login', function () {
-
-    print_r($_POST);
-
-});
+Route::get('/delete/{id}', 'AdvertsController@destroy');
