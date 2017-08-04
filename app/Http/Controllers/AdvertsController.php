@@ -2,15 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+
 
 class AdvertsController extends Controller
 {
     //
-    public function destroy($id) {
-        var_dump('hoooo');die();
-        $ad  = \App\Adverts::deleteAdvert($id);
-        echo 'Advert is delete';
-        return redirect()->back();
+    public function destroy($id)
+    {
+        $ad = \App\Adverts::deleteAdvert($id);
+        return redirect('/');
     }
+
+    public function created(Request $request)
+    {
+        $input = $request::all();
+        $ad = \App\Adverts::createdAdvert($input);
+        $id = $ad['id'];
+        return redirect($id);
+    }
+
+    public function getAdvert($id)
+    {
+        $data = \App\Adverts::getAdvertData($id);
+        return view('prewie', compact('data'));
+    }
+
+    public function update($id)
+    {
+        $input = [
+            'id' => $id,
+            'title' => $_POST['title'],
+            'description' => $_POST['description'],
+        ];
+        \App\Adverts::updateAdvert($input);
+        return redirect('/');
+    }
+
 }

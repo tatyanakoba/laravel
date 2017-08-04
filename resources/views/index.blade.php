@@ -33,6 +33,9 @@
             </div>
         </div>
     </form>
+    <div style="margin-left: 70%">
+        <a href= "{{ url('/edit') }}" class="btn btn-primary">Create New Adwert</a>
+    </div>
     <div>
         <?php foreach ($advert as $key => $value):
         $author = App\Users::getAuthorName($value['user_id']);
@@ -44,7 +47,7 @@
         <p class="text-center">Author: {{  $author }}</p>
         <p class="text-center">{{  $value['created_at'] }}</p>
         <div class="col-sm-offset-8 col-sm-10">
-            <button type="button" class="btn btn-success">Edit</button>
+            <a href="/edit/{{$id}}" class="btn btn-success">Edit</a>
             <a href="/delete/{{$id}}" class="btn btn-danger">Delete</a>
         </div>
 

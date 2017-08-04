@@ -12,6 +12,7 @@
 */
 
 
+
 Route::post('/', 'Auth\LoginController@login');
 Route::get('/', function () {
     $advert = App\Adverts::paginate(5);
@@ -19,3 +20,18 @@ Route::get('/', function () {
 });
 
 Route::get('/delete/{id}', 'AdvertsController@destroy');
+
+Route::get('/edit', function () {
+     return view('edit');
+});
+
+Route::post('/create', 'AdvertsController@created');
+
+Route::get('/{id}', 'AdvertsController@getAdvert');
+
+Route::get('/edit/{id}', function ($id) {
+    $data = \App\Adverts::getAdvertData($id);
+    return view('edit', compact('data'));
+});
+
+Route::post('/update/{id}', 'AdvertsController@update');
