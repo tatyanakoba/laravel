@@ -13,7 +13,8 @@
 </head>
 <body>
 <div>
-    <form method="POST" action="/" role="form" class="form-horizontal">
+    <?php if(empty($id)): ?>
+    <form method="POST" action="/login" role="form" class="form-horizontal">
         {!! csrf_field() !!}
         <div class="form-group">
             <label for="username" class="col-sm-2 control-label">Username</label>
@@ -29,10 +30,11 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Login</button>
+                <input type="submit" class="btn btn-default" value="Login">
             </div>
         </div>
     </form>
+    <?php endif; ?>
     <div style="margin-left: 70%">
         <a href= "{{ url('/edit') }}" class="btn btn-primary">Create New Adwert</a>
     </div>

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use App\Http\Controllers\Controller;
+use Request;
+use View;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -38,9 +41,16 @@ class LoginController extends Controller
     }
 
 
-    public function login()
+    public function login(Request $request)
     {
-        dd(request()->all());
+        $input = $request::all();
+        $id = \App\Users::login($input);
+        if (!$id) {
+            echo 'Вы ввели неверные данные';
+        } else {
+            Controller::setUser($id);
+            return redirect('/');
+        }
 
     }
 }

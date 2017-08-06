@@ -25,7 +25,7 @@ class AdvertsController extends Controller
     public function getAdvert($id)
     {
         $data = \App\Adverts::getAdvertData($id);
-        return view('prewie', compact('data'));
+        return view('preview', compact('data'));
     }
 
     public function update($id)

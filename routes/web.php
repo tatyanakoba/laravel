@@ -10,13 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\Controller;
 
-
-
-Route::post('/', 'Auth\LoginController@login');
 Route::get('/', function () {
+    $id = Controller::getUser();
     $advert = App\Adverts::paginate(5);
-    return view('index', compact('advert'));
+    return view('index', ['advert' => compact('advert'), 'id' => $id]);
 });
 
 Route::get('/delete/{id}', 'AdvertsController@destroy');
@@ -35,3 +34,6 @@ Route::get('/edit/{id}', function ($id) {
 });
 
 Route::post('/update/{id}', 'AdvertsController@update');
+
+Route::post('/login', 'Auth\LoginController@login');
+
